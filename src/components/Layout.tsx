@@ -1,19 +1,10 @@
 import type { ReactElement } from "react";
 
-import {
-  AppBar,
-  Box,
-  Button,
-  styled,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, styled } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-
-import useThemeContext from "../hooks/useThemeContext";
 import styles from "./Layout.module.css";
 import Menu from "./Menu";
+import Header from "./Header";
 
 interface LayoutProps {
   children: ReactElement;
@@ -34,28 +25,10 @@ const StyledAppbar = styled(AppBar)(() => ({
 }));
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { toggleColorMode } = useThemeContext();
-
   return (
     <div style={{ display: "flex", minHeight: "780px" }}>
       <StyledAppbar>
-        <Toolbar>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <AttachMoneyIcon />
-            <Typography>Trade App</Typography>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
-            {" "}
-            {/* ml: 'auto' pushes to the right */}
-            <Button
-              sx={{ align: "right" }}
-              variant="contained"
-              onClick={toggleColorMode}
-            >
-              Toggle Theme
-            </Button>
-          </Box>
-        </Toolbar>
+        <Header />
       </StyledAppbar>
       <StyledDrawer variant="permanent" anchor="left">
         <Menu></Menu>
