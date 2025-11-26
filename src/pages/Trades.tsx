@@ -1,11 +1,11 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import type React from "react";
 import { useMemo } from "react";
 import { useTradesStore } from "../store/useTradesStore";
 
 const Trades: React.FC = () => {
-  const columns = useMemo(
+  const columns: GridColDef[] = useMemo(
     () => [
       {
         field: "id",
