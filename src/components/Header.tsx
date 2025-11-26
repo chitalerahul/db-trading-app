@@ -10,7 +10,7 @@ const Header: React.FC = () => {
     <Toolbar>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <AttachMoneyIcon />
-        <Typography>Trade App</Typography>
+        <Typography>Trade Store</Typography>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
         {" "}
