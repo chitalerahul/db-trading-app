@@ -4,8 +4,16 @@ import About from "./pages/About.tsx";
 import Trade from "./pages/Trade.tsx";
 import Trades from "./pages/Trades.tsx";
 import CustomThemeProvider from "./contexts/ThemeContext.tsx";
+import { useTradesStore } from "./store/useTradesStore.ts";
+import { useEffect } from "react";
 
 function App() {
+  const { fetchTrades } = useTradesStore();
+
+  useEffect(() => {
+    fetchTrades();
+  }, [fetchTrades]);
+
   return (
     <CustomThemeProvider>
       <Router>

@@ -1,0 +1,38 @@
+import { create } from "zustand";
+
+interface ITrade {
+  id: string;
+  version: number;
+  counterPartyId: string;
+  bookId: string;
+  maturityDate: Date;
+  createdDate: Date;
+  expired: boolean;
+}
+
+interface ITradesState {
+  data: ITrade[];
+  isLoading: boolean;
+  error: string | null;
+  fetchTrades: () => Promise<void> | void;
+}
+
+export const useTradesStore = create<ITradesState>((set) => ({
+  data: [],
+  isLoading: false,
+  error: null,
+  fetchTrades: async () => {
+    set({ isLoading: true, error: null }); // Set loading state before fetching
+    try {
+      const response = await fetch("http://localhost:5173/api/trades");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      set({ data, isLoading: false }); // Update state with fetched data
+    } catch (error: unknown) {
+      const typedError = error as Error;
+      set({ error: typedError.message, isLoading: false }); // Handle errors
+    }
+  },
+}));

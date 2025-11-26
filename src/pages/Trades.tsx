@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import type React from "react";
 import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useTradesStore } from "../store/useTradesStore";
 
 const Trades: React.FC = () => {
   const columns = useMemo(
@@ -39,13 +39,9 @@ const Trades: React.FC = () => {
     []
   );
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ["trades"],
-    queryFn: () =>
-      fetch("http://localhost:5173/api/trades").then((res) => res.json()),
-  });
+  const { isLoading, error, data } = useTradesStore();
 
-  if (isPending) return <CircularProgress />;
+  if (isLoading) return <CircularProgress />;
 
   if (error) return <div>Error occured in fetching trades</div>;
 
