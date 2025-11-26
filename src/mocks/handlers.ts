@@ -5,7 +5,7 @@ export const handlers = [
     return HttpResponse.json([
       {
         id: "T1",
-        version: 1,
+        version: 2,
         counterPartyId: "CP-1",
         bookId: "B1",
         maturityDate: "2025-11-25",

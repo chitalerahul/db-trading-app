@@ -21,8 +21,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Trades />} />
             <Route path="/trades" element={<Trades />} />
-            <Route path="/trade/:id" element={<Trade />} />
-            <Route path="/trade/create" element={<Trade />} />
+            <Route path="/edittrade/:id" element={<Trade />} />
+            <Route path="/createtrade" element={<Trade />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </Layout>

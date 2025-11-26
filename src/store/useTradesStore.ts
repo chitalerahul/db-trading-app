@@ -6,7 +6,7 @@ export interface ITrade {
   counterPartyId: string;
   bookId: string;
   maturityDate: Date;
-  createdDate: Date;
+  createdDate?: Date | "";
 }
 
 interface ITradesState {
@@ -14,9 +14,10 @@ interface ITradesState {
   isLoading: boolean;
   error: string | null;
   fetchTrades: () => Promise<void> | void;
+  updateTrade: (t: ITrade) => void;
 }
 
-export const useTradesStore = create<ITradesState>((set) => ({
+export const useTradesStore = create<ITradesState>((set, get) => ({
   data: [],
   isLoading: false,
   error: null,
@@ -33,5 +34,8 @@ export const useTradesStore = create<ITradesState>((set) => ({
       const typedError = error as Error;
       set({ error: typedError.message, isLoading: false }); // Handle errors
     }
+  },
+  updateTrade: (t) => {
+    set({ data: get().data.map((trade) => (trade.id === t.id ? t : trade)) });
   },
 }));

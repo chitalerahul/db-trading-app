@@ -24,7 +24,7 @@ const Menu: React.FC = () => {
     {
       text: "Create Trade",
       icon: <CreateIcon color="secondary" />,
-      path: "/trade/create",
+      path: "/createtrade",
     },
     {
       text: "About",
