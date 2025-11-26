@@ -31,11 +31,11 @@ const Trades: React.FC = () => {
       },
       {
         field: "maturityDate",
-        headerName: "Maturity Date",
+        headerName: "Maturity",
       },
       {
         field: "createdDate",
-        headerName: "Created Date",
+        headerName: "Created",
       },
       {
         field: "expired",

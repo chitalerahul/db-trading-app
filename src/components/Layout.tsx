@@ -10,7 +10,7 @@ interface LayoutProps {
   children: ReactElement;
 }
 
-const drawerWidth = 250;
+const drawerWidth = 225;
 
 const StyledDrawer = styled(Drawer)(() => ({
   width: drawerWidth,
