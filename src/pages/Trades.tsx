@@ -81,12 +81,17 @@ const Trades: React.FC = () => {
     },
   ];
 
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 5, // Initial page size
-    page: 0,
-  });
-
-  const { isLoading, error, data } = useTradesStore();
+  const {
+    isLoading,
+    error,
+    data,
+    filterModel,
+    setFilterModel,
+    sortModel,
+    setSortModel,
+    paginationModel,
+    setPaginationModel,
+  } = useTradesStore();
 
   if (isLoading) return <CircularProgress />;
 
@@ -105,9 +110,15 @@ const Trades: React.FC = () => {
         columns={columns}
         rows={data}
         paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
+        onPaginationModelChange={(newPaginationModel) =>
+          setPaginationModel(newPaginationModel)
+        }
         pageSizeOptions={[5, 10, 20]}
         getRowId={(row) => row.id}
+        filterModel={filterModel}
+        onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
+        sortModel={sortModel}
+        onSortModelChange={(newSortModel) => setSortModel(newSortModel)}
       ></DataGrid>
     </Box>
   );
