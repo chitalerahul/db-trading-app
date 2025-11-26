@@ -1,13 +1,12 @@
 import { create } from "zustand";
 
-interface ITrade {
+export interface ITrade {
   id: string;
   version: number;
   counterPartyId: string;
   bookId: string;
   maturityDate: Date;
   createdDate: Date;
-  expired: boolean;
 }
 
 interface ITradesState {
