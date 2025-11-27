@@ -1,11 +1,11 @@
+import { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import About from "./pages/About.tsx";
-import Trade from "./pages/Trade.tsx";
 import Trades from "./pages/Trades.tsx";
 import CustomThemeProvider from "./contexts/ThemeContext.tsx";
 import { useTradesStore } from "./store/useTradesStore.ts";
-import { useEffect } from "react";
+const About = lazy(() => import("./pages/About.tsx"));
+const Trade = lazy(() => import("./pages/Trade.tsx"));
 
 function App() {
   const { fetchTrades } = useTradesStore();
@@ -21,9 +21,30 @@ function App() {
           <Routes>
             <Route path="/" element={<Trades />} />
             <Route path="/trades" element={<Trades />} />
-            <Route path="/edittrade/:id" element={<Trade />} />
-            <Route path="/createtrade" element={<Trade />} />
-            <Route path="/about" element={<About />} />
+            <Route
+              path="/edittrade/:id"
+              element={
+                <Suspense>
+                  <Trade />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/createtrade"
+              element={
+                <Suspense>
+                  <Trade />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <Suspense>
+                  <About />
+                </Suspense>
+              }
+            />
           </Routes>
         </Layout>
       </Router>
