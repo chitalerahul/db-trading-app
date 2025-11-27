@@ -20,6 +20,7 @@ interface ITradesState {
   paginationModel?: GridPaginationModel;
   fetchTrades: () => Promise<void> | void;
   updateTrade: (t: ITrade) => void;
+  addTrade: (t: ITrade) => void;
   setFilterModel: (model: GridFilterModel) => void;
   setSortModel: (model: GridSortModel) => void;
   setPaginationModel: (model: GridPaginationModel) => void;
@@ -51,6 +52,9 @@ export const useTradesStore = create<ITradesState>((set, get) => ({
   },
   updateTrade: (t) => {
     set({ data: get().data.map((trade) => (trade.id === t.id ? t : trade)) });
+  },
+  addTrade: (t) => {
+    set({ data: [...get().data, t] });
   },
   setFilterModel: (model: GridFilterModel) => {
     set({ filterModel: model });

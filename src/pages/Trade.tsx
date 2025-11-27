@@ -7,7 +7,7 @@ import { isBefore, startOfDay } from "date-fns";
 export default function Trade() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { updateTrade, data: trades } = useTradesStore();
+  const { updateTrade, addTrade, data: trades } = useTradesStore();
   const {
     register,
     handleSubmit,
@@ -17,16 +17,22 @@ export default function Trade() {
   const isEdit = trade ? true : false;
   const remoteTrade = isEdit ? trades.find((t) => t.id === trade?.id) : null;
   const onSubmit: SubmitHandler<ITrade> = (data) => {
-    if (isEdit && remoteTrade?.version === Number(data.version)) {
-      const isVersionConfirmed = confirm(
-        "Do you want to override same version to updated trade?"
-      );
-      if (isVersionConfirmed) {
+    if (isEdit) {
+      if (Number(remoteTrade?.version) === Number(data.version)) {
+        const isVersionConfirmed = confirm(
+          "Do you want to override same version to updated trade?"
+        );
+        if (isVersionConfirmed) {
+          updateTrade({ ...data, createdDate: trade?.createdDate });
+          navigate("/trades");
+        }
+      } else {
         updateTrade({ ...data, createdDate: trade?.createdDate });
         navigate("/trades");
       }
     } else {
-      updateTrade({ ...data, createdDate: trade?.createdDate });
+      addTrade({ ...data, createdDate: startOfDay(new Date()) });
+      navigate("/trades");
     }
   };
 
@@ -46,6 +52,14 @@ export default function Trade() {
     return true;
   };
 
+  const validateTradeId = (value: string) => {
+    if (isEdit) return true;
+    const existingTrade = trades.find((t) => t.id === value);
+    if (existingTrade)
+      return "Trade Id already exists. Please enter another trade id.";
+    return true;
+  };
+
   return (
     <Box sx={{ height: 400, width: "100%" }}>
       <Typography
@@ -62,11 +76,14 @@ export default function Trade() {
             <input
               disabled={isEdit}
               defaultValue={trade ? trade.id : ""}
-              {...register("id", { required: true })}
+              {...register("id", {
+                required: "This field is required",
+                validate: validateTradeId,
+              })}
             />
           </label>
           {errors.id && (
-            <span style={{ color: "red" }}>This field is required</span>
+            <span style={{ color: "red" }}>{errors.id.message}</span>
           )}
         </div>
         <div>

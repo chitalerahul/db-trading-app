@@ -25,7 +25,7 @@ function App() {
               path="/edittrade/:id"
               element={
                 <Suspense>
-                  <Trade />
+                  <Trade key="editTrade" />
                 </Suspense>
               }
             />
@@ -33,7 +33,7 @@ function App() {
               path="/createtrade"
               element={
                 <Suspense>
-                  <Trade />
+                  <Trade key="createTrade" />
                 </Suspense>
               }
             />
