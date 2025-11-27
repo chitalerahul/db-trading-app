@@ -57,58 +57,68 @@ export default function Trade() {
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <span>Trade Id: </span>
-          <input
-            disabled={isEdit}
-            defaultValue={trade ? trade.id : ""}
-            {...register("id", { required: true })}
-          />
+          <label>
+            Trade Id:
+            <input
+              disabled={isEdit}
+              defaultValue={trade ? trade.id : ""}
+              {...register("id", { required: true })}
+            />
+          </label>
           {errors.id && (
             <span style={{ color: "red" }}>This field is required</span>
           )}
         </div>
         <div>
-          <span>Version: </span>
-          <input
-            defaultValue={trade ? trade.version : ""}
-            {...register("version", {
-              required: "This field is required",
-              validate: validateVersionIsGreaterOrEqual,
-            })}
-          />
+          <label>
+            Version:
+            <input
+              defaultValue={trade ? trade.version : ""}
+              {...register("version", {
+                required: "This field is required",
+                validate: validateVersionIsGreaterOrEqual,
+              })}
+            />
+          </label>
           {errors.version && (
             <span style={{ color: "red" }}>{errors.version.message}</span>
           )}
         </div>
         <div>
-          <span>Counter Party Id: </span>
-          <input
-            defaultValue={trade ? trade.counterPartyId : ""}
-            {...register("counterPartyId", { required: true })}
-          />
-          {errors.counterPartyId && (
-            <span style={{ color: "red" }}>This field is required</span>
-          )}
+          <label>
+            Counter Party Id:
+            <input
+              defaultValue={trade ? trade.counterPartyId : ""}
+              {...register("counterPartyId", { required: true })}
+            />
+            {errors.counterPartyId && (
+              <span style={{ color: "red" }}>This field is required</span>
+            )}
+          </label>
         </div>
         <div>
-          <span>Book Id: </span>
-          <input
-            defaultValue={trade ? trade.bookId : ""}
-            {...register("bookId", { required: true })}
-          />
+          <label>
+            Book Id:
+            <input
+              defaultValue={trade ? trade.bookId : ""}
+              {...register("bookId", { required: true })}
+            />
+          </label>
           {errors.bookId && (
             <span style={{ color: "red" }}>This field is required</span>
           )}
         </div>
         <div>
-          <span>Maturity Date (yyyy-MM-dd e.g. 2025-11-30): </span>
-          <input
-            defaultValue={trade ? trade.maturityDate + "" : ""}
-            {...register("maturityDate", {
-              required: "This field is required",
-              validate: validateMaturityGreaterEqualToday,
-            })}
-          />
+          <label>
+            Maturity Date (yyyy-MM-dd e.g. 2025-11-30):
+            <input
+              defaultValue={trade ? trade.maturityDate + "" : ""}
+              {...register("maturityDate", {
+                required: "This field is required",
+                validate: validateMaturityGreaterEqualToday,
+              })}
+            />
+          </label>
           {errors.maturityDate && (
             <span style={{ color: "red" }}>{errors.maturityDate.message}</span>
           )}
