@@ -14,6 +14,11 @@ export default defineConfig({
       deps: {
         inline: ["@mui/x-data-grid"],
       },
+      coverage: {
+        provider: "v8",
+        enabled: true,
+        reporter: ["text", "html", "json"], // or 'istanbul'
+      },
     },
   },
 } as UserConfig);
