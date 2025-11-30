@@ -12,11 +12,12 @@ export default function Trade() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ITrade>();
+  } = useForm<ITrade>({ mode: "onSubmit" });
   const trade: ITrade | undefined = location.state;
   const isEdit = trade ? true : false;
   const remoteTrade =
     isEdit && trades ? trades?.find((t) => t.id === trade?.id) : null;
+
   const onSubmit: SubmitHandler<ITrade> = async (data) => {
     if (isEdit) {
       if (Number(remoteTrade?.version) === Number(data.version)) {
@@ -70,6 +71,7 @@ export default function Trade() {
         variant="h6"
         component="h6"
         sx={{ textAlign: "center", mt: 3, mb: 3 }}
+        data-testid="tradeHeader"
       >
         {trade ? "Edit Trade" : "Add Trade"}
       </Typography>
@@ -79,6 +81,7 @@ export default function Trade() {
             <label>
               Trade Id:
               <input
+                data-testid="id"
                 disabled={isEdit}
                 defaultValue={trade ? trade.id : ""}
                 {...register("id", {
@@ -88,13 +91,16 @@ export default function Trade() {
               />
             </label>
             {errors.id && (
-              <span style={{ color: "red" }}>{errors.id.message}</span>
+              <span style={{ color: "red" }} data-testid="idError">
+                {errors.id.message}
+              </span>
             )}
           </div>
           <div>
             <label>
               Version:
               <input
+                data-testid="version"
                 defaultValue={trade ? trade.version : ""}
                 {...register("version", {
                   required: "This field is required",
@@ -103,18 +109,23 @@ export default function Trade() {
               />
             </label>
             {errors.version && (
-              <span style={{ color: "red" }}>{errors.version.message}</span>
+              <span style={{ color: "red" }} data-testid="versionError">
+                {errors.version.message}
+              </span>
             )}
           </div>
           <div>
             <label>
               Counter Party Id:
               <input
+                data-testid="couterPartyId"
                 defaultValue={trade ? trade.counterPartyId : ""}
                 {...register("counterPartyId", { required: true })}
               />
               {errors.counterPartyId && (
-                <span style={{ color: "red" }}>This field is required</span>
+                <span style={{ color: "red" }} data-testid="couterPartyIdError">
+                  This field is required
+                </span>
               )}
             </label>
           </div>
@@ -122,18 +133,22 @@ export default function Trade() {
             <label>
               Book Id:
               <input
+                data-testid="bookId"
                 defaultValue={trade ? trade.bookId : ""}
                 {...register("bookId", { required: true })}
               />
             </label>
             {errors.bookId && (
-              <span style={{ color: "red" }}>This field is required</span>
+              <span style={{ color: "red" }} data-testid="bookIdError">
+                This field is required
+              </span>
             )}
           </div>
           <div>
             <label>
               Maturity Date (yyyy-MM-dd e.g. 2025-11-30):
               <input
+                data-testid="maturityDate"
                 defaultValue={trade ? trade.maturityDate + "" : ""}
                 {...register("maturityDate", {
                   required: "This field is required",
@@ -142,12 +157,12 @@ export default function Trade() {
               />
             </label>
             {errors.maturityDate && (
-              <span style={{ color: "red" }}>
+              <span style={{ color: "red" }} data-testid="maturityDateError">
                 {errors.maturityDate.message}
               </span>
             )}
           </div>
-          <input type="submit" />
+          <input type="submit" data-testid="tradeSubmit" />
         </form>
       </div>
     </Box>

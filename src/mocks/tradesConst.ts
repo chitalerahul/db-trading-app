@@ -64,10 +64,10 @@ export const trades = [
   },
   {
     id: "T8",
-    version: 1,
+    version: 5,
     counterPartyId: "CP-1",
     bookId: "B1",
-    maturityDate: "2025-12-02",
+    maturityDate: "2026-05-10",
     createdDate: "2025-11-26",
     expired: false,
   },
