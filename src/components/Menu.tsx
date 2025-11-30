@@ -35,11 +35,17 @@ const Menu: React.FC = () => {
   return (
     <>
       <div style={{ paddingLeft: "16px" }}>
-        <Typography variant="h5">Menu</Typography>
+        <Typography variant="h5" data-testid="menu">
+          Menu
+        </Typography>
       </div>
-      <List>
+      <List data-testid="menuItems">
         {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
+          <ListItem
+            key={item.text}
+            data-testid={`menuItem` + item.text}
+            disablePadding
+          >
             <ListItemButton
               onClick={() => navigate(item.path)}
               selected={location.pathname === item.path}
@@ -48,6 +54,7 @@ const Menu: React.FC = () => {
                   backgroundColor: "primary.contrast", // Example active background color
                 },
               }}
+              data-testid={`menuButton` + item.text}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
