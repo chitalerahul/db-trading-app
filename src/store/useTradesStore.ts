@@ -20,7 +20,9 @@ interface ITradesState {
   paginationModel?: GridPaginationModel;
   fetchTrades: () => Promise<void> | void;
   updateTrade: (t: ITrade) => void;
+  updateRemoteTrade: (t: ITrade) => Promise<void>;
   addTrade: (t: ITrade) => void;
+  addRemoteTrade: (t: ITrade) => Promise<void>;
   setFilterModel: (model: GridFilterModel) => void;
   setSortModel: (model: GridSortModel) => void;
   setPaginationModel: (model: GridPaginationModel) => void;
@@ -53,8 +55,51 @@ export const useTradesStore = create<ITradesState>((set, get) => ({
   updateTrade: (t) => {
     set({ data: get().data.map((trade) => (trade.id === t.id ? t : trade)) });
   },
+  updateRemoteTrade: async (t: ITrade) => {
+    set({ isLoading: true, error: null }); // Set loading state before fetching
+    try {
+      const response = await fetch("http://localhost:5173/api/trade/" + t.id, {
+        method: "PUT", // Specify the method as POST
+        headers: {
+          "Content-Type": "application/json", // Indicate the content type of the body
+          Accept: "application/json", // Indicate the expected response type
+        },
+        body: JSON.stringify(t),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      set({
+        data: get().data.map((trade) => (trade.id === t.id ? t : trade)),
+        isLoading: false,
+      }); // Update state with fetched data
+    } catch (error: unknown) {
+      const typedError = error as Error;
+      set({ error: typedError.message, isLoading: false }); // Handle errors
+    }
+  },
   addTrade: (t) => {
     set({ data: [...get().data, t] });
+  },
+  addRemoteTrade: async (t: ITrade) => {
+    set({ isLoading: true, error: null }); // Set loading state before fetching
+    try {
+      const response = await fetch("http://localhost:5173/api/trade/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Indicate the content type of the body
+          Accept: "application/json", // Indicate the expected response type
+        },
+        body: JSON.stringify(t),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      set({ data: [...get().data, t], isLoading: false }); // Update state with fetched data
+    } catch (error: unknown) {
+      const typedError = error as Error;
+      set({ error: typedError.message, isLoading: false }); // Handle errors
+    }
   },
   setFilterModel: (model: GridFilterModel) => {
     set({ filterModel: model });

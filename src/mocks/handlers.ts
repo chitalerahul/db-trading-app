@@ -1,89 +1,14 @@
 import { http, HttpResponse } from "msw";
+import { trades } from "./tradesConst";
 
 export const handlers = [
   http.get("http://localhost:5173/api/trades", () => {
-    return HttpResponse.json([
-      {
-        id: "T1",
-        version: 2,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-11-25",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T2",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-11-26",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T3",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-11-27",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T4",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-11-28",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T5",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-11-29",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T6",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-11-30",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T7",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-12-01",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T8",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-12-02",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-      {
-        id: "T9",
-        version: 1,
-        counterPartyId: "CP-1",
-        bookId: "B1",
-        maturityDate: "2025-12-03",
-        createdDate: "2025-11-26",
-        expired: false,
-      },
-    ]);
+    return HttpResponse.json(trades);
+  }),
+  http.put("http://localhost:5173/api/trade/:id", (res) => {
+    return HttpResponse.json(res);
+  }),
+  http.post("http://localhost:5173/api/trade", (res) => {
+    return HttpResponse.json(res);
   }),
 ];

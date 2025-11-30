@@ -7,7 +7,7 @@ import { isBefore, startOfDay } from "date-fns";
 export default function Trade() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { updateTrade, addTrade, data: trades } = useTradesStore();
+  const { updateRemoteTrade, addRemoteTrade, data: trades } = useTradesStore();
   const {
     register,
     handleSubmit,
@@ -15,23 +15,27 @@ export default function Trade() {
   } = useForm<ITrade>();
   const trade: ITrade | undefined = location.state;
   const isEdit = trade ? true : false;
-  const remoteTrade = isEdit ? trades.find((t) => t.id === trade?.id) : null;
-  const onSubmit: SubmitHandler<ITrade> = (data) => {
+  const remoteTrade =
+    isEdit && trades ? trades?.find((t) => t.id === trade?.id) : null;
+  const onSubmit: SubmitHandler<ITrade> = async (data) => {
     if (isEdit) {
       if (Number(remoteTrade?.version) === Number(data.version)) {
         const isVersionConfirmed = confirm(
           "Do you want to override same version to updated trade?"
         );
         if (isVersionConfirmed) {
-          updateTrade({ ...data, createdDate: trade?.createdDate });
+          await updateRemoteTrade({
+            ...data,
+            createdDate: trade?.createdDate,
+          });
           navigate("/trades");
         }
       } else {
-        updateTrade({ ...data, createdDate: trade?.createdDate });
+        await updateRemoteTrade({ ...data, createdDate: trade?.createdDate });
         navigate("/trades");
       }
     } else {
-      addTrade({ ...data, createdDate: startOfDay(new Date()) });
+      await addRemoteTrade({ ...data, createdDate: startOfDay(new Date()) });
       navigate("/trades");
     }
   };
