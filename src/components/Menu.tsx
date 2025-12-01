@@ -11,6 +11,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CreateIcon from "@mui/icons-material/Create";
 import InfoIcon from "@mui/icons-material/Info";
+import { BASE } from "../mocks/tradesConst";
 
 const Menu: React.FC = () => {
   const navigate = useNavigate();
@@ -19,17 +20,17 @@ const Menu: React.FC = () => {
     {
       text: "Trades Dashboard",
       icon: <DashboardIcon color="secondary" />,
-      path: "/trades",
+      path: BASE + "trades",
     },
     {
       text: "Create Trade",
       icon: <CreateIcon color="secondary" />,
-      path: "/createtrade",
+      path: BASE + "createtrade",
     },
     {
       text: "About",
       icon: <InfoIcon color="secondary" />,
-      path: "/about",
+      path: BASE + "about",
     },
   ];
   return (

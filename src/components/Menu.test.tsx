@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import Menu from "./Menu";
+import { BASE } from "../mocks/tradesConst";
 
 const mockNavigate = vi.fn(); // Create a mock function for useNavigate
 const mockLocation = vi.fn();
@@ -45,19 +46,19 @@ describe("Menu Component", () => {
         "menuButtonTrades Dashboard"
       );
       menuButtonTradesDashboard[0].click();
-      expect(mockNavigate).toHaveBeenCalledWith("/trades");
+      expect(mockNavigate).toHaveBeenCalledWith(BASE + "trades");
     });
     it("Create Trade click navigates to Create Trade", () => {
       const menuButtonCreateTrade = screen.getAllByTestId(
         "menuButtonCreate Trade"
       );
       menuButtonCreateTrade[0].click();
-      expect(mockNavigate).toHaveBeenCalledWith("/createtrade");
+      expect(mockNavigate).toHaveBeenCalledWith(BASE + "createtrade");
     });
     it("Create Trade click navigates to About", () => {
       const menuButtonAbout = screen.getAllByTestId("menuButtonAbout");
       menuButtonAbout[0].click();
-      expect(mockNavigate).toHaveBeenCalledWith("/about");
+      expect(mockNavigate).toHaveBeenCalledWith(BASE + "about");
     });
   });
 });

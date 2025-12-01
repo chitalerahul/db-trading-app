@@ -3,6 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTradesStore, type ITrade } from "../store/useTradesStore";
 import { isBefore, startOfDay } from "date-fns";
+import { BASE } from "../mocks/tradesConst";
 
 export default function Trade() {
   const location = useLocation();
@@ -29,15 +30,15 @@ export default function Trade() {
             ...data,
             createdDate: trade?.createdDate,
           });
-          navigate("/trades");
+          navigate(BASE + "trades");
         }
       } else {
         await updateRemoteTrade({ ...data, createdDate: trade?.createdDate });
-        navigate("/trades");
+        navigate(BASE + "/trades");
       }
     } else {
       await addRemoteTrade({ ...data, createdDate: startOfDay(new Date()) });
-      navigate("/trades");
+      navigate(BASE + "/trades");
     }
   };
 

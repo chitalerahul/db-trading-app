@@ -16,6 +16,7 @@ import { useTradesStore } from "../store/useTradesStore";
 import { type ITrade } from "../store/useTradesStore";
 import { isBefore, startOfDay } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { BASE } from "../mocks/tradesConst";
 
 const Trades: React.FC = () => {
   const navigate = useNavigate();
@@ -46,7 +47,9 @@ const Trades: React.FC = () => {
             aria-label="Edit Trade"
             color="primary"
             onClick={() =>
-              navigate(`/edittrade/${params.row.id}`, { state: params.row })
+              navigate(`${BASE}edittrade/${params.row.id}`, {
+                state: params.row,
+              })
             }
           >
             <EditNoteIcon></EditNoteIcon>
@@ -102,6 +105,7 @@ const Trades: React.FC = () => {
         variant="h6"
         component="h6"
         sx={{ textAlign: "center", mt: 3, mb: 3 }}
+        data-cy="tradeGridHeader"
       >
         Trade Dashboard
       </Typography>
@@ -118,6 +122,7 @@ const Trades: React.FC = () => {
         onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
         sortModel={sortModel}
         onSortModelChange={(newSortModel) => setSortModel(newSortModel)}
+        data-cy="tradeGrid"
       ></DataGrid>
     </Box>
   );

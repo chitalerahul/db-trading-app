@@ -37,12 +37,16 @@ jobs:
       - name: Run Test
         run: npm run test
 
+      #Run e2e
+      - name: Run e2e
+        run: npm run cy:run
+
       #Build the project
       - name: Build the project
         run: npm run build
 
       #Deploy to github Pages
-      # - name: Deploy to github Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{secrets.GITHUB_TOKEN}}
+      - name: Deploy to github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}

@@ -1,6 +1,7 @@
 import type { GridPaginationModel, GridSortModel } from "@mui/x-data-grid";
 import type { GridFilterModel } from "@mui/x-data-grid";
 import { create } from "zustand";
+import { API_URL } from "../mocks/tradesConst";
 
 export interface ITrade {
   id: string;
@@ -41,7 +42,7 @@ export const useTradesStore = create<ITradesState>((set, get) => ({
   fetchTrades: async () => {
     set({ isLoading: true, error: null }); // Set loading state before fetching
     try {
-      const response = await fetch("http://localhost:5173/api/trades");
+      const response = await fetch(API_URL + "/api/trades");
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -58,7 +59,7 @@ export const useTradesStore = create<ITradesState>((set, get) => ({
   updateRemoteTrade: async (t: ITrade) => {
     set({ isLoading: true, error: null }); // Set loading state before fetching
     try {
-      const response = await fetch("http://localhost:5173/api/trade/" + t.id, {
+      const response = await fetch(API_URL + "/api/trade/" + t.id, {
         method: "PUT", // Specify the method as POST
         headers: {
           "Content-Type": "application/json", // Indicate the content type of the body
@@ -84,7 +85,7 @@ export const useTradesStore = create<ITradesState>((set, get) => ({
   addRemoteTrade: async (t: ITrade) => {
     set({ isLoading: true, error: null }); // Set loading state before fetching
     try {
-      const response = await fetch("http://localhost:5173/api/trade/", {
+      const response = await fetch(API_URL + "/api/trade/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Indicate the content type of the body
