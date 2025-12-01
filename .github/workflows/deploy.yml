@@ -25,6 +25,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      #Audit Vulnerabilities
+      - name: Audit Vulnerabilities
+        run: npm audit
+
       #Run Lint
       - name: Run Lint
         run: npm run lint
