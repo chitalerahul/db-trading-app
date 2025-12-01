@@ -11,32 +11,32 @@ jobs:
     steps:
       #Checkout Repository
       -name: Checkout code
-       uses: actions/checkout@v3
+      uses: actions/checkout@v3
 
       #Setup Node
       -name: Setup Node
-       uses: actions/setup-node@v3
-       with:
+      uses: actions/setup-node@v3
+      with:
         node-version: 24.11.1
 
       #Install Dependencies
       -name: Install Dependencies
-       run: npm install
+      run: npm install
 
       #Run Lint
       -name: Run Lint
-       run: npm run lint
+      run: npm run lint
       
       #Run Test
       -name: Run Test
-       run: npm run test
+      run: npm run test
 
       #Build the project
       -name: Build the project
-       run: npm run build
+      run: npm run build
 
       #Deploy to github Pages
       -name: Deploy to github Pages
-       uses: peaceiris/actions-gh-pages@v3
-       with:
+      uses: peaceiris/actions-gh-pages@v3
+      with:
         github_token: ${{secrets.GITHUB_TOKEN}}
