@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/db-trading-app/",
   server: {
     open: true,
-    port: 5173,
+    port: 3000,
   },
   test: {
     // 👋 add the line below to add jsdom to vite

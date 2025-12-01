@@ -37,12 +37,16 @@ jobs:
       - name: Run Test
         run: npm run test
 
+      #Cypress Run
+      - name: Start Vite server and run Cypress tests
+        run: npm run dev & npx wait-on http://localhost:3000 && npx cypress run
+
       #Build the project
       - name: Build the project
         run: npm run build
 
       #Deploy to github Pages
-      - name: Deploy to github Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
+      # - name: Deploy to github Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{secrets.GITHUB_TOKEN}}

@@ -1,6 +1,6 @@
 export const BASE = "/db-trading-app/";
-export const APP_URL = "http://localhost:5173" + BASE;
-export const API_URL = "http://localhost:3000";
+export const APP_URL = "http://localhost:3000" + BASE;
+export const API_URL = "http://localhost:3001";
 export const trades = [
   {
     id: "T1",
