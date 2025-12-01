@@ -1,0 +1,19 @@
+name: Cypress Tests
+
+on: [push] # Trigger the workflow on every push
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest # Specify the runner environment
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # Checkout your repository code
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6 # Use the official Cypress GitHub Action
+        with:
+          start: npm start start # Command to start your application (if needed)
+          wait-on: "http://localhost:3000" # Wait for the application to be ready
+          browser: electron # Specify the browser (e.g., chrome, firefox, electron)
+          headless: true # Run tests in headless mode

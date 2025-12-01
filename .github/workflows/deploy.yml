@@ -37,10 +37,6 @@ jobs:
       - name: Run Test
         run: npm run test
 
-      #Run e2e
-      - name: Run e2e
-        run: npm run cy:run
-
       #Build the project
       - name: Build the project
         run: npm run build
