@@ -4,6 +4,11 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/db-trading-app/",
+  server: {
+    open: true,
+    port: 5173,
+  },
   test: {
     // 👋 add the line below to add jsdom to vite
     environment: "jsdom",

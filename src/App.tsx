@@ -1,5 +1,10 @@
 import { useEffect, Suspense, lazy } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import Trades from "./pages/Trades.tsx";
 import CustomThemeProvider from "./contexts/ThemeContext.tsx";
@@ -19,8 +24,7 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<Trades />} />
-            <Route path="/trades" element={<Trades />} />
+            <Route path="/trades" index element={<Trades />} />
             <Route
               path="/edittrade/:id"
               element={
@@ -45,6 +49,7 @@ function App() {
                 </Suspense>
               }
             />
+            <Route path="*" element={<Navigate to="/trades" />} />
           </Routes>
         </Layout>
       </Router>
